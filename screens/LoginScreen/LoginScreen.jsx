@@ -1,8 +1,10 @@
 import { Background } from "../../components/Background/Background";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "../../components/Background/Button/Button";
+import { useNavigation } from "@react-navigation/native";
 
 export const LoginScreen = () => {
+  const navigation = useNavigation();
   return (
     <Background>
       <View style={s.form}>
@@ -17,8 +19,18 @@ export const LoginScreen = () => {
           placeholder="Your password"
           placeholderTextColor="#fff"
         />
-        <Button styleBtn={s.btn} styleText={s.btnText}>
+        <Button
+          styleBtn={s.btn}
+          styleText={s.btnText}
+          onClick={() => navigation.navigate("MusicApp")}
+        >
           Login
+        </Button>
+        <Button
+          styleText={s.navigation}
+          onClick={() => navigation.navigate("Registration")}
+        >
+          Registration
         </Button>
       </View>
     </Background>
@@ -58,4 +70,7 @@ const s = StyleSheet.create({
     justifyContent: "center",
   },
   btnText: { color: "#fff", fontSize: 22 },
+  navigation: {
+    color: "#fff",
+  },
 });
