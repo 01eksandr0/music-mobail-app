@@ -1,7 +1,7 @@
 import { Background } from "../../components/Background/Background";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { Button } from "../../components/Background/Button/Button";
 import { useNavigation } from "@react-navigation/native";
+import { Button } from "../../components/Button/Button";
 
 export const LoginScreen = () => {
   const navigation = useNavigation();
@@ -43,7 +43,7 @@ const s = StyleSheet.create({
     flexDirection: "column",
     gap: 30,
     alignItems: "center",
-    marginTop: 20,
+    paddingTop: 60,
   },
   title: {
     color: "#fff",

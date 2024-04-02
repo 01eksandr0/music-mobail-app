@@ -1,6 +1,6 @@
 import { Background } from "../../components/Background/Background";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { Button } from "../../components/Background/Button/Button";
+import { Button } from "../../components/Button/Button";
 import { useNavigation } from "@react-navigation/native";
 
 export const RegistrScreen = () => {
@@ -24,6 +24,7 @@ export const RegistrScreen = () => {
           placeholder="Your password"
           placeholderTextColor="#fff"
         />
+
         <Button
           styleBtn={s.btn}
           styleText={s.btnText}
@@ -48,7 +49,7 @@ const s = StyleSheet.create({
     flexDirection: "column",
     gap: 30,
     alignItems: "center",
-    marginTop: 20,
+    paddingTop: 60,
   },
   title: {
     color: "#fff",

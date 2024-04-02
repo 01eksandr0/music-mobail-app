@@ -11,6 +11,5 @@ const s = StyleSheet.create({
     height: "100%",
     backgroundColor: " rgb(30, 30, 30)",
     padding: 25,
-    paddingTop: 60,
   },
 });
