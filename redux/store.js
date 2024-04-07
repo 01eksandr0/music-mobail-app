@@ -1,8 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { persistReducer, persistStore } from "redux-persist";
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { playlistsReducer } from "./slices/playlistSlice";
-import { favoritesTracksReducer } from "./slices/favoriteTrackSlice";
+import { favoritesTracksReducer } from "favoriteTrackSlice";
 import { playerReduser } from "./slices/playerSlice";
 
 const persistConfig = {
@@ -20,6 +29,12 @@ const reducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 const persistor = persistStore(store);
