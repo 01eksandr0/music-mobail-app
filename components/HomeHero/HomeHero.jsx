@@ -1,35 +1,76 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import fav from "../../img/backFav.avif";
 import { AntDesign } from "@expo/vector-icons";
 import { HomeHeroPlaylistItem } from "../HomeHeroPlaylistItem/HomeHeroPlaylistItem";
 import { HomeHeroCreateItem } from "../HomeHeroCreateItem/HomeHeroCreateItem";
 import { useSelector } from "react-redux";
 import { selectPlaylists } from "../../redux/selecter";
+import { useNavigation } from "@react-navigation/native";
 
 export const HomeHero = () => {
   const list = useSelector(selectPlaylists);
+  const navigation = useNavigation();
 
   return (
     <View style={s.container}>
-      <View style={s.item}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Favorite");
+          setTimeout(() => navigation.navigate("FavoriteTracks"));
+        }}
+        style={s.item}
+      >
         <ImageBackground source={fav} style={s.favorite}>
           <AntDesign name="heart" size={20} color="#fff" />
         </ImageBackground>
         <Text style={s.text}>Favorite</Text>
-      </View>
+      </TouchableOpacity>
       {list[0] ? (
-        <HomeHeroPlaylistItem>{list[0].name}</HomeHeroPlaylistItem>
+        <HomeHeroPlaylistItem
+          onPress={() => {
+            navigation.navigate("Favorite");
+            setTimeout(() =>
+              navigation.navigate("Playlist", { id: list[0].id })
+            );
+          }}
+        >
+          {list[0].name}
+        </HomeHeroPlaylistItem>
       ) : (
         <HomeHeroCreateItem />
       )}
       {list[1] ? (
-        <HomeHeroPlaylistItem>{list[1].name}</HomeHeroPlaylistItem>
+        <HomeHeroPlaylistItem
+          onPress={() => {
+            navigation.navigate("Favorite");
+            setTimeout(() =>
+              navigation.navigate("Playlist", { id: list[1].id })
+            );
+          }}
+        >
+          {list[1].name}
+        </HomeHeroPlaylistItem>
       ) : (
         <HomeHeroCreateItem />
       )}
       {list[2] ? (
-        <HomeHeroPlaylistItem>{list[2].name}</HomeHeroPlaylistItem>
+        <HomeHeroPlaylistItem
+          onPress={() => {
+            navigation.navigate("Favorite");
+            setTimeout(() =>
+              navigation.navigate("Playlist", { id: list[2].id })
+            );
+          }}
+        >
+          {list[2].name}
+        </HomeHeroPlaylistItem>
       ) : (
         <HomeHeroCreateItem />
       )}

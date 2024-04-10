@@ -1,6 +1,6 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const initialState = [{ id: nanoid(), name: "MyPlaylist", list: [] }];
+const initialState = [{ id: nanoid(), name: "My Playlist", list: [] }];
 
 const playlistsSlice = createSlice({
   name: "playlists",
@@ -8,7 +8,11 @@ const playlistsSlice = createSlice({
   reducers: {
     createNewPlaylist: {
       reducer(state, action) {
-        state.push({ id: nanoid(), name: action.payload.name, list: [] });
+        state.push({
+          id: nanoid(),
+          name: action.payload.name,
+          list: [],
+        });
       },
       prepare(name) {
         return { payload: { name } };

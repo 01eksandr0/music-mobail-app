@@ -11,18 +11,26 @@ import {
 } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { playlistsReducer } from "./slices/playlistSlice";
-import { favoritesTracksReducer } from "favoriteTrackSlice";
+
 import { playerReduser } from "./slices/playerSlice";
+import { favoritesTracksReducer } from "./slices/favoriteTracksSlice";
+import { modalCreateReducer } from "./slices/modalCreateSlice";
+import { modalMoreInfoReducer } from "./slices/modalMoreInfoSlice";
+import { modalAddInPlaylistReducer } from "./slices/modalAddInPlaylistSlice";
 
 const persistConfig = {
-  key: "roo",
+  key: "12www12j",
   storage: AsyncStorage,
+  whitelist: ["playlists"],
 };
 
 const rootReducer = combineReducers({
   playlists: playlistsReducer,
   favoriteTracks: favoritesTracksReducer,
   player: playerReduser,
+  moreInfo: modalMoreInfoReducer,
+  modalCreate: modalCreateReducer,
+  modalAddPlaylist: modalAddInPlaylistReducer,
 });
 
 const reducer = persistReducer(persistConfig, rootReducer);

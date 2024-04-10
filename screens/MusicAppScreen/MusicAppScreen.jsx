@@ -6,7 +6,6 @@ import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MyHeader } from "../../components/MyHeader/MyHeader";
-import { Player } from "../../components/Player/Player";
 
 export const MusicAppScreen = () => {
   const Tabs = createBottomTabNavigator();
@@ -15,11 +14,8 @@ export const MusicAppScreen = () => {
       screenOptions={{
         header: () => <MyHeader />,
         tabBarStyle: { backgroundColor: "rgb(40,40,40)", paddingTop: 10 },
-      }}
-      tabBarOptions={{
-        style: { backgroundColor: "lightblue" },
-        activeTintColor: "rgb(250, 205, 102)",
-        inactiveTintColor: "rgba(255,255,255,0.5)",
+        tabBarInactiveTintColor: "rgba(255,255,255,0.5)",
+        tabBarActiveTintColor: "rgb(250, 205, 102)",
       }}
     >
       <Tabs.Group>
@@ -41,6 +37,7 @@ export const MusicAppScreen = () => {
             tabBarIcon: ({ color }) => (
               <FontAwesome name="search" size={26} color={color} />
             ),
+            headerShown: false,
           }}
         />
         <Tabs.Screen
@@ -51,6 +48,7 @@ export const MusicAppScreen = () => {
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="library-music" size={28} color={color} />
             ),
+            headerShown: false,
           }}
         />
       </Tabs.Group>

@@ -1,16 +1,28 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import grey from "../../img/grey.avif";
 import { Entypo } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { openModalCreate } from "../../redux/slices/modalCreateSlice";
 
 export const HomeHeroCreateItem = () => {
+  const dispatch = useDispatch();
   return (
-    <View style={s.item}>
+    <TouchableOpacity
+      onPress={() => dispatch(openModalCreate())}
+      style={s.item}
+    >
       <ImageBackground source={grey} style={s.favorite}>
         <Entypo name="plus" size={24} color="black" />
       </ImageBackground>
       <Text style={s.text}>Create playlist</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

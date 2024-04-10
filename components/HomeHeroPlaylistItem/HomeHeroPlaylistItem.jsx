@@ -1,13 +1,19 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import playlist from "../../img/playlist.png";
 
-export const HomeHeroPlaylistItem = ({ children }) => {
+export const HomeHeroPlaylistItem = ({ children, onPress }) => {
   return (
-    <View style={s.item}>
+    <TouchableOpacity onPress={onPress} style={s.item}>
       <ImageBackground source={playlist} style={s.favorite}></ImageBackground>
       <Text style={s.text}>{children}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
