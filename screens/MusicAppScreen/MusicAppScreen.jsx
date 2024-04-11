@@ -6,9 +6,20 @@ import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MyHeader } from "../../components/MyHeader/MyHeader";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/selecter";
+import { useNavigation } from "@react-navigation/native";
 
 export const MusicAppScreen = () => {
   const Tabs = createBottomTabNavigator();
+  const navigation = useNavigation();
+  const { token } = useSelector(selectUser);
+  useEffect(() => {
+    if (!token) {
+      navigation.navigate("Login");
+    }
+  }, [token]);
   return (
     <Tabs.Navigator
       screenOptions={{

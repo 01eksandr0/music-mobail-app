@@ -2,34 +2,67 @@ import { Background } from "../../components/Background/Background";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "../../components/Button/Button";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../redux/selecter";
+import { createUser } from "../../redux/slices/userSlice";
 
 export const RegistrScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [emailForm, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { token } = useSelector(selectUser);
+
+  useEffect(() => {
+    if (token) {
+      navigation.navigate("MusicApp");
+    }
+  }, [token]);
+  useEffect(() => {
+    if (token) {
+      navigation.navigate("MusicApp");
+    }
+  }, []);
+
+  const registration = async () => {
+    try {
+      const {
+        user: { accessToken, email },
+      } = await createUserWithEmailAndPassword(auth, emailForm, password);
+      dispatch(createUser(accessToken, email));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Background>
       <View style={s.form}>
         <Text style={s.title}>Registration</Text>
         <TextInput
+          onChangeText={(e) => setName(e)}
           style={s.input}
           placeholder="Your name"
           placeholderTextColor="#fff"
         />
         <TextInput
+          onChangeText={(e) => setEmail(e)}
           style={s.input}
           placeholder="Your email"
           placeholderTextColor="#fff"
         />
         <TextInput
+          onChangeText={(e) => setPassword(e)}
           style={s.input}
           placeholder="Your password"
           placeholderTextColor="#fff"
         />
 
-        <Button
-          styleBtn={s.btn}
-          styleText={s.btnText}
-          onClick={() => navigation.navigate("MusicApp")}
-        >
+        <Button styleBtn={s.btn} styleText={s.btnText} onClick={registration}>
           Registr
         </Button>
         <Button

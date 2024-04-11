@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { FavoriteHome } from "../FavoriteHome/FavoriteHome";
 import { FavoriteTracks } from "../../components/FavoriteTracks/FavoriteTracks";
 import { Playlist } from "../../components/Playlist/Playlist";
+import { ArtistInfo } from "../ArtistInfo/ArtistInfo";
 
 export const MyFavoriteScreen = () => {
   const Stack = createStackNavigator();
@@ -22,6 +23,11 @@ export const MyFavoriteScreen = () => {
       <Stack.Screen
         name="Playlist"
         component={Playlist}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ArtistInfo"
+        component={ArtistInfo}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

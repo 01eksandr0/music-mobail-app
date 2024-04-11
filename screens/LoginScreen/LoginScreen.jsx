@@ -2,28 +2,58 @@ import { Background } from "../../components/Background/Background";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "../../components/Button/Button";
+import { useEffect, useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config";
+import { selectUser } from "../../redux/selecter";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser } from "../../redux/slices/userSlice";
 
 export const LoginScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [emailForm, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { token } = useSelector(selectUser);
+
+  useEffect(() => {
+    if (token) {
+      navigation.navigate("MusicApp");
+    }
+  }, [token]);
+  useEffect(() => {
+    if (token) {
+      navigation.navigate("MusicApp");
+    }
+  }, []);
+
+  const registration = async () => {
+    try {
+      const {
+        user: { accessToken, email },
+      } = await signInWithEmailAndPassword(auth, emailForm, password);
+      dispatch(createUser(accessToken, email));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Background>
       <View style={s.form}>
         <Text style={s.title}>Login</Text>
         <TextInput
+          onChangeText={(e) => setEmail(e)}
           style={s.input}
           placeholder="Your email"
           placeholderTextColor="#fff"
         />
         <TextInput
+          onChangeText={(e) => setPassword(e)}
           style={s.input}
           placeholder="Your password"
           placeholderTextColor="#fff"
         />
-        <Button
-          styleBtn={s.btn}
-          styleText={s.btnText}
-          onClick={() => navigation.navigate("MusicApp")}
-        >
+        <Button styleBtn={s.btn} styleText={s.btnText} onClick={registration}>
           Login
         </Button>
         <Button

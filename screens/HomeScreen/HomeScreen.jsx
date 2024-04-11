@@ -40,7 +40,12 @@ export const HomeScreen = () => {
         <ScrolList title={"Recomend artist"}>
           {listArtists.map((i) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate("ArtistInfo", { id: i.id })}
+              onPress={() => {
+                navigation.navigate("Favorite");
+                setTimeout(() =>
+                  navigation.navigate("ArtistInfo", { id: i.id })
+                );
+              }}
               key={i.id}
             >
               <HomeTrack img={i.img} name={i.name} />

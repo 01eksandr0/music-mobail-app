@@ -17,11 +17,12 @@ import { favoritesTracksReducer } from "./slices/favoriteTracksSlice";
 import { modalCreateReducer } from "./slices/modalCreateSlice";
 import { modalMoreInfoReducer } from "./slices/modalMoreInfoSlice";
 import { modalAddInPlaylistReducer } from "./slices/modalAddInPlaylistSlice";
+import { userReducer } from "./slices/userSlice";
 
 const persistConfig = {
   key: "12www12j",
   storage: AsyncStorage,
-  whitelist: ["playlists"],
+  whitelist: ["playlists", "user"],
 };
 
 const rootReducer = combineReducers({
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   moreInfo: modalMoreInfoReducer,
   modalCreate: modalCreateReducer,
   modalAddPlaylist: modalAddInPlaylistReducer,
+  user: userReducer,
 });
 
 const reducer = persistReducer(persistConfig, rootReducer);

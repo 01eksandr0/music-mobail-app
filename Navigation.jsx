@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { LoginScreen } from "./screens/LoginScreen/LoginScreen";
@@ -11,18 +11,19 @@ import {
   selectMoreInfo,
   selectPlayer,
 } from "./redux/selecter";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ModalCreatePlaylist } from "./components/ModalCreatePlaylist/ModalCreatePlaylist";
 import { ModalMoreInfo } from "./components/ModalMoreInfo/ModalMoreInfo";
 import { ModalAddInPlaylist } from "./components/ModalAddInPlaylist/ModalAddInPlaylist";
-import { ArtistInfo } from "./screens/ArtistInfo/ArtistInfo";
 
 export const MyNavigation = () => {
+  const dispatch = useDispatch();
   const Stack = createStackNavigator();
   const { status } = useSelector(selectPlayer);
   const modalCreate = useSelector(selectModalCreate);
   const moreInfo = useSelector(selectMoreInfo);
   const modalAddInPlaylist = useSelector(selectModalAddPlaylist);
+
   return (
     <>
       <NavigationContainer>
@@ -40,11 +41,6 @@ export const MyNavigation = () => {
           <Stack.Screen
             name="MusicApp"
             component={MusicAppScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ArtistInfo"
-            component={ArtistInfo}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

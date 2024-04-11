@@ -4,11 +4,13 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Button } from "../Button/Button";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { createUser } from "../../redux/slices/userSlice";
 export const MyHeader = () => {
-  const navigation = useNavigation();
+  const dispatch = useDispatch();
   return (
     <View style={s.container}>
-      <Button onClick={() => navigation.navigate("Login")}>
+      <Button onClick={() => dispatch(createUser("", ""))}>
         <FontAwesome name="user" size={26} color="rgb(164, 199, 198)" />
       </Button>
       <Text style={s.text}>Music is life</Text>
